@@ -3,6 +3,7 @@ import cors from 'cors'
 import express, { Application, NextFunction, Request, Response } from 'express'
 import httpStatus from 'http-status'
 import globalErrorHandler from './app/middlewares/globalErrorHandler'
+import routers from './app/routes'
 
 const app: Application = express()
 
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
 })
 
 // routes
-// app.use('/api/v1', routers)
+app.use('/api/v1', routers)
 
 // global error handler
 app.use(globalErrorHandler)
