@@ -60,13 +60,17 @@ const authChangePassword = catchAsync(async (req, res) => {
   const userId = req.user?.userId
   const { oldPassword, newPassword } = req.body
 
-  await AuthService.authChangePassword({ userId, oldPassword, newPassword })
+  const result = await AuthService.authChangePassword({
+    userId,
+    oldPassword,
+    newPassword,
+  })
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     status: true,
     message: 'Password changed successfully',
-    data: null,
+    data: result,
   })
 })
 

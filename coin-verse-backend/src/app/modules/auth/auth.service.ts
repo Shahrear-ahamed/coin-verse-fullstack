@@ -188,16 +188,13 @@ const authChangePassword = async (payload: IAuthChangePassword) => {
     { userId },
     { password: newPassword },
     { new: true },
-  )
+  ).select('-password -createdAt -updatedAt  -_id')
 
   if (!changePassword) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to change password', '')
   }
 
-  return {
-    userId,
-    message: 'Password updated',
-  }
+  return changePassword
 }
 
 export const AuthService = {
