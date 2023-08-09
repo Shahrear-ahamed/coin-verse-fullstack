@@ -1,7 +1,8 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 type IPayload = {
-  email: string
+  userId: string
+  role: string
 }
 
 const createToken = (

@@ -31,17 +31,23 @@ const authSignUp = async (payload: IUser) => {
     }
 
     // set user id into user, create user and throw error
-    const preUserDetails = { userId, email: payload?.email }
+    const preUserDetails = {
+      userId,
+      email: payload?.email,
+    }
     const newUser = await User.create([preUserDetails], { session })
 
     if (!newUser.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to create user', '')
     }
 
+    // get auth and user
+    const auth = newAuth[0]
     const user = newUser[0]
 
     const userDetails = {
-      email: user.email,
+      userId: user.userId,
+      role: auth.role,
     }
 
     const accessToken = await JwtHelpers.createToken(
@@ -50,7 +56,7 @@ const authSignUp = async (payload: IUser) => {
       config.jwt_expired as string,
     )
 
-    userReturn = { ...userDetails, accessToken }
+    userReturn = { userId, accessToken }
 
     // commit transaction and end transaction
     await session.commitTransaction()
@@ -74,13 +80,9 @@ const authLogin = async (payload: IAuth) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
   }
 
-  console.log(isUserExist)
-
   // check password match
 
   const passMatch = await Auth.matchPassword(password, isUserExist.password)
-
-  console.log(passMatch)
 
   if (!passMatch) {
     throw new ApiError(
@@ -91,7 +93,8 @@ const authLogin = async (payload: IAuth) => {
   }
 
   const userDetails = {
-    email: isUserExist.email,
+    userId: isUserExist.userId,
+    role: isUserExist.role,
   }
 
   const accessToken = await JwtHelpers.createToken(
@@ -104,7 +107,11 @@ const authLogin = async (payload: IAuth) => {
     config.jwt_refresh_secret as string,
     config.jwt_refresh_expired as string,
   )
-  return { ...userDetails, accessToken, refreshToken }
+  return {
+    userId: isUserExist.userId,
+    accessToken,
+    refreshToken,
+  }
 }
 
 export const AuthService = {

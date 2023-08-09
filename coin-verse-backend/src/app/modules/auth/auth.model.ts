@@ -17,7 +17,6 @@ const authSchema = new Schema<IAuth>(
     password: {
       type: String,
       required: true,
-      select: 0,
     },
     role: {
       type: String,
@@ -32,11 +31,6 @@ const authSchema = new Schema<IAuth>(
   {
     timestamps: true,
     versionKey: false,
-    toJSON: {
-      transform: function (doc, ret) {
-        delete ret.password
-      },
-    },
   },
 )
 
@@ -51,7 +45,6 @@ authSchema.statics.matchPassword = async function (
   givenPassword: string,
   storedPassword: string,
 ): Promise<boolean> {
-  
   return givenPassword === storedPassword
 }
 
