@@ -6,7 +6,7 @@ import ApiError from '../../../errors/ApiErrors'
 import { JwtHelpers } from '../../../helpers/JwtHelpers'
 import { IUser } from '../user/user.interface'
 import User from '../user/user.model'
-import { IAuth } from './auth.interface'
+import { IAuth, IAuthChangePassword } from './auth.interface'
 import Auth from './auth.model'
 
 const authSignUp = async (payload: IUser) => {
@@ -114,7 +114,95 @@ const authLogin = async (payload: IAuth) => {
   }
 }
 
+const authRefreshToken = async (token: string) => {
+  // verify token
+  let verifiedToken = null
+  try {
+    verifiedToken = JwtHelpers.verifyToken(
+      token,
+      config.jwt_refresh_secret as string,
+    )
+  } catch (error) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Invalid Refresh Token', '')
+  }
+
+  const { userId } = verifiedToken
+
+  const isUserExist = await Auth.isUserExistById(userId)
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
+  }
+
+  // get user details
+  const userDetails = {
+    userId: isUserExist.userId,
+    role: isUserExist.role,
+  }
+
+  // create new access token and refresh token
+  const accessToken = await JwtHelpers.createToken(
+    userDetails,
+    config.jwt_secret as string,
+    config.jwt_expired as string,
+  )
+
+  const newRefreshToken = await JwtHelpers.createToken(
+    userDetails,
+    config.jwt_refresh_secret as string,
+    config.jwt_refresh_expired as string,
+  )
+
+  return {
+    userId: isUserExist.userId,
+    accessToken,
+    refreshToken: newRefreshToken,
+  }
+}
+
+const authChangePassword = async (payload: IAuthChangePassword) => {
+  const { userId, oldPassword, newPassword } = payload
+
+  // check user exist
+  const isUserExist = await Auth.isUserExistById(userId)
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
+  }
+
+  // check password match
+  const passMatch = await Auth.matchPassword(oldPassword, isUserExist.password)
+
+  if (!passMatch) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Old password is wrong', '')
+  }
+
+  // update password
+  const checkPasswordChangeCapability = await Auth.updatePassword(userId)
+
+  if (!checkPasswordChangeCapability) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "You can't change password", '')
+  }
+
+  const changePassword = await Auth.findOneAndUpdate(
+    { userId },
+    { password: newPassword },
+    { new: true },
+  )
+
+  if (!changePassword) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to change password', '')
+  }
+
+  return {
+    userId,
+    message: 'Password updated',
+  }
+}
+
 export const AuthService = {
   authSignUp,
   authLogin,
+  authRefreshToken,
+  authChangePassword,
 }
