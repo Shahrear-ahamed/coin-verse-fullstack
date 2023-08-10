@@ -2,26 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  color: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* custom css */
+.blur__effect {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 4px 30px #00000017;
+  background: #ffffff50;
+  z-index: 999;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.drop__shadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.sign-up__hover:hover {
+  box-shadow: 0 0 20px 20px #a4f08f1a;
+  scale: 1.05;
+}
+.get-start__hover:hover {
+  box-shadow: 0 0 70px 30px #a4f08f38;
+  scale: 1.05;
+}
+
+.mobile_menu {
+  display: none;
+  cursor: pointer;
+}
+
+.menu_box {
+  width: 28px;
+  height: 25px;
+  display: flex;
+  margin-left: 30px;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu_box span {
+  width: 100%;
+  height: 3px;
+  border-radius: 50px;
+  background-color: white;
+  transition: all 0.5s ease-in-out;
+}
+
+.animate {
+  transform: rotate(180deg);
+  transition: all 0.6s ease-in-out;
+}
+
+.animate span:nth-child(1) {
+  margin-left: 10px;
+  transform: rotate(-45deg) translate(-50%, 50%);
+}
+.animate span:nth-child(2) {
+  width: 0px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.animate span:nth-child(3) {
+  margin-left: 10px;
+  transform: rotate(45deg) translate(-50%, -50%);
 }

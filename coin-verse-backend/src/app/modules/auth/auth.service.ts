@@ -11,6 +11,7 @@ import Auth from './auth.model'
 
 const authSignUp = async (payload: IUser) => {
   let userReturn
+  const signUpBonus = 10
 
   // create unique id
   const userId = uuidv4()
@@ -34,6 +35,7 @@ const authSignUp = async (payload: IUser) => {
     const preUserDetails = {
       userId,
       email: payload?.email,
+      balance: signUpBonus,
     }
     const newUser = await User.create([preUserDetails], { session })
 

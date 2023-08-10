@@ -8,6 +8,7 @@ export type IUser = {
   email: string
   contactNo: string
   dateOfBirth: Date
+  balance: number
 }
 
 export type UserModel = Model<IUser>
