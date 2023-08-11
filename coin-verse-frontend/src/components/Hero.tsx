@@ -1,7 +1,21 @@
 import Link from "next/link";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { BsChevronDown, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 function Hero() {
+  const outSuccess = [
+    {
+      title: "10 Years",
+      subtitle: "in the business",
+    },
+    {
+      title: "Millions",
+      subtitle: "of bets token",
+    },
+    {
+      title: "Billions",
+      subtitle: "bets placed",
+    },
+  ];
   return (
     <section className="">
       <div className="relative mb-6 md:mb-16">
@@ -29,6 +43,22 @@ function Hero() {
                   </div>
                 </div>
               </Link>
+            </div>
+
+            <div className="relative flex justify-between w-full md:max-w-[820px] mx-auto mt-16">
+              {outSuccess.map((item, idx) => (
+                <div key={idx}>
+                  <h4 className="text-xl md:text-5xl mb-2 md:mb-6">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm md:text-base mb-2 text-gray-400">
+                    {item.subtitle}
+                  </p>
+                </div>
+              ))}
+              <div className="absolute text-2xl -bottom-20 left-1/2 translate-x-1/2 animate-bounce cursor-pointer">
+                <BsChevronDown />
+              </div>
             </div>
           </div>
         </div>

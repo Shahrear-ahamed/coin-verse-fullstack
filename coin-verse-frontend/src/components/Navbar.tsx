@@ -12,7 +12,7 @@ export default function Navbar() {
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <title>Coin Verse - Explore the World of Digital Coins</title>
       </Head>
-      <nav className="absolute w-full top-0 z-50 drop__shadow">
+      <nav className="fixed w-full top-0 z-50 drop__shadow">
         <div className="max-w-screen-xl w-[95%] mx-auto my-5 flex justify-between flex-row">
           <div className="flex-none lg:flex-initial">
             <Link href="/">
