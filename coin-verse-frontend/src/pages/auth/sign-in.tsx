@@ -21,12 +21,14 @@ const Login = () => {
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600">
         <div className="text-center">
-          <Image
-            src={logo}
-            width={220}
-            className="mx-auto"
-            alt="coin verse logo"
-          />
+          <Link href="/">
+            <Image
+              src={logo}
+              width={220}
+              className="mx-auto"
+              alt="coin verse logo"
+            />
+          </Link>
           <div className="mt-5 space-y-2">
             <h3 className="text-2xl font-bold sm:text-3xl">
               Log in to your account
@@ -76,7 +78,9 @@ const Login = () => {
           </button>
 
           <div className="text-center">
-            <Link href="/auth/forget-password" className="text-indigo-600 hover:text-indigo-500">
+            <Link
+              href="/auth/forget-password"
+              className="text-indigo-600 hover:text-indigo-500">
               Forgot password?
             </Link>
           </div>

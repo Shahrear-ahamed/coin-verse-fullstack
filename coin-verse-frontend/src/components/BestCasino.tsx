@@ -24,10 +24,10 @@ export default function BestCasino() {
   });
 
   return (
-    <div className="max-w-[1200px] w-[95%] mx-auto my-10 md:my-20">
-      <div className="grid md:grid-cols-2 md:grid-rows-1 gap-10 items-center justify-center ">
+    <section className="max-w-[1200px] w-[90%] mx-auto my-20">
+      <div className="grid md:grid-cols-2 md:grid-rows-1 gap-10 items-center justify-center pb-o md:pb-20">
         <div className="order-2 md:order-1">
-          <h2 className="text-2xl lg:text-5xl mb-9 bg-gradient-to-r from-[#ec4079e7] from-10% via-white via-35% font-extrabold to-[#ec4079e7] to-85% inline-block text-transparent bg-clip-text">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-center pb-2 mb-2 md:pb-3 md:mb-9 bg-gradient-to-r from-[#ec4079e7] from-10% via-white via-35% font-extrabold to-[#ec4079e7] to-85% inline-block text-transparent bg-clip-text">
             The Original Crypto Coin Casino
           </h2>
           <div className="grid gap-7 mt-3">
@@ -39,7 +39,9 @@ export default function BestCasino() {
                   className="flex flex-col gap-4 md:flex-row md:gap-10 items-center md:items-start justify-start">
                   <div className="text-5xl">{data.icon}</div>
                   <div className="text-center md:text-left">
-                    <h3 className="text-2xl mb-2 font-extrabold">{data.title}</h3>
+                    <h3 className="text-2xl mb-2 font-extrabold">
+                      {data.title}
+                    </h3>
                     <p className="text-sm text-gray-300">{data.description}</p>
                   </div>
                 </div>
@@ -58,6 +60,6 @@ export default function BestCasino() {
             style={{ width: "300px", height: "300px" }}></lottie-player>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
