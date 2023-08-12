@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { BsChevronDown, BsFillArrowRightCircleFill } from "react-icons/bs";
 
+import Image from "next/image";
+import bitcoin from "../assets/cryptocoin/bitcoin.png";
+import bitcoinCash from "../assets/cryptocoin/bitcoincash.png";
+import dash from "../assets/cryptocoin/dash.svg";
+import ethereum from "../assets/cryptocoin/ethereum.png";
+import lightCoin from "../assets/cryptocoin/lightcoin.svg";
+import paxGold from "../assets/cryptocoin/paxgold.png";
+
 function Hero() {
   const outSuccess = [
     {
@@ -16,8 +24,18 @@ function Hero() {
       subtitle: "bets placed",
     },
   ];
+
+  const coins = [
+    { name: "bitcoin", image: bitcoin },
+    { name: "bitcoin cash", image: bitcoinCash },
+    { name: "dash", image: dash },
+    { name: "ethereum", image: ethereum },
+    { name: "light coin", image: lightCoin },
+    { name: "pax gold", image: paxGold },
+  ];
+
   return (
-    <section className="">
+    <section>
       <div className="relative mb-6 md:mb-16">
         <div
           className="absolute inset-0 blur-xl h-full"
@@ -56,8 +74,35 @@ function Hero() {
                   </p>
                 </div>
               ))}
-              <div className="absolute text-2xl -bottom-20 left-1/2 translate-x-1/2 animate-bounce cursor-pointer">
+              <div className="absolute z-30 text-2xl -bottom-28 md:-bottom-48 left-1/2 translate-x-1/2 animate-bounce cursor-pointer">
                 <BsChevronDown />
+              </div>
+            </div>
+
+            <div className="max-w-3xl mx-auto flex select-none py-12 hero_coins_mask overflow-hidden">
+              <div className="flex-shrink-0 flex items-center justify-around whitespace-nowrap w-full animate-marquee">
+                {coins.map((item, idx) => (
+                  <div key={idx} className="grid">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className="w-8 md:w-16 h-8 md:h-16"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex-shrink-0 flex items-center justify-around whitespace-nowrap w-full animate-marquee">
+                {coins.map((item, idx) => (
+                  <div key={idx} className="grid">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className="w-8 md:w-16 h-8 md:h-16"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

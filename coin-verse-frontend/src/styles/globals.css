@@ -12,7 +12,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -23,7 +22,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #1A1D20;
+  background-color: #1a1d20;
 }
 
 /* custom css */
@@ -90,4 +89,15 @@ body {
 .animate span:nth-child(3) {
   margin-left: 10px;
   transform: rotate(45deg) translate(-50%, -50%);
+}
+
+
+.hero_coins_mask {
+  mask-image: linear-gradient(
+    to right,
+    hsl(0 0% 0% / 0) 0%,
+    hsl(0 0% 0% / 1) 10%,
+    hsl(0 0% 0% / 1) 90%,
+    hsl(0 0% 0% / 0)
+  );
 }
