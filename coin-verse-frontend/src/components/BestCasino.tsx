@@ -27,9 +27,14 @@ export default function BestCasino() {
     <section className="max-w-[1200px] w-[90%] mx-auto my-20">
       <div className="grid md:grid-cols-2 md:grid-rows-1 gap-10 items-center justify-center pb-o md:pb-20">
         <div className="order-2 md:order-1">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-center pb-2 mb-2 md:pb-3 md:mb-9 bg-gradient-to-r from-[#ec4079e7] from-10% via-white via-35% font-extrabold to-[#ec4079e7] to-85% inline-block text-transparent bg-clip-text">
-            The Original Crypto Coin Casino
-          </h2>
+          <div className="relative">
+            <h2 className="display_title display_2 display_2-shadow">
+              The Original Crypto Coin Casino
+            </h2>
+            <div className="display_title display_2 glow opacity-50 left-0">
+              The Original Crypto Coin Casino
+            </div>
+          </div>
           <div className="grid gap-7 mt-3">
             {
               // start data

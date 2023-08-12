@@ -25,6 +25,48 @@ body {
   background-color: #1a1d20;
 }
 
+/* // layer component  */
+@layer components {
+  .hero_title {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-[#38E2F9] from-20% via-[#FFACC8] via-50%  to-[#FFF176] to-85% inline-block text-transparent bg-clip-text py-10;
+  }
+
+  .title_shadow {
+    text-shadow: 0 1px 110px rgba(255, 172, 200, 0.5);
+  }
+
+  .display_title {
+    @apply text-3xl md:text-4xl lg:text-5xl text-center pb-2 mb-2 md:pb-3 md:mb-9 bg-gradient-to-r from-10% via-35% to-85% inline-block text-transparent bg-clip-text;
+  }
+
+  .display_1 {
+    @apply from-[#F7AB3A] via-white font-extrabold to-[#F7AB3A];
+  }
+  .display_1-shadow {
+    text-shadow: 0 1px 110px rgba(247, 172, 59, 0.5);
+  }
+
+  .display_2 {
+    @apply from-[#ec4079e7] via-white font-extrabold to-[#ec4079e7];
+  }
+  .display_2-shadow {
+    text-shadow: 0 1px 110px rgba(236, 64, 121, 0.5);
+  }
+
+  .display_3 {
+    @apply from-[#38E2F9] via-white font-extrabold to-[#38E2F9];
+  }
+  .display_3-shadow {
+    text-shadow: 0 1px 110px rgba(56, 226, 249, 0.5);
+  }
+
+  .glow {
+    filter: blur(72px);
+    position: absolute;
+    top: 0;
+  }
+}
+
 /* custom css */
 .blur__effect {
   backdrop-filter: blur(30px);
@@ -90,7 +132,6 @@ body {
   margin-left: 10px;
   transform: rotate(45deg) translate(-50%, -50%);
 }
-
 
 .hero_coins_mask {
   mask-image: linear-gradient(

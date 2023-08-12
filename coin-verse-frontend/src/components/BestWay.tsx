@@ -37,9 +37,14 @@ export default function BestWay() {
             style={{ width: "300px", height: "300px" }}></lottie-player>
         </div>
         <div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-center pb-2 mb-2 md:pb-3 md:mb-9 bg-gradient-to-r from-[#38E2F9] from-10% via-white via-35% font-extrabold to-[#38E2F9] to-85% inline-block text-transparent bg-clip-text">
-            Best way to bet with crypto
-          </h2>
+          <div className="relative">
+            <h2 className="display_title display_3 display_3-shadow">
+              Best way to bet with crypto
+            </h2>
+            <div className="display_title display_3 glow opacity-50 left-0">
+              Best way to bet with crypto
+            </div>
+          </div>
           <div className="grid gap-7 mt-3">
             {
               // start data

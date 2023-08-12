@@ -37,9 +37,14 @@ export default function StartFrom() {
             style={{ width: "320px", height: "300px" }}></lottie-player>
         </div>
         <div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-center pb-2 mb-2 md:pb-3 md:mb-9 bg-gradient-to-r from-[#F7AB3A] from-10% via-white via-35% font-extrabold to-[#F7AB3A] to-85% inline-block text-transparent bg-clip-text">
-            Best bitcoin gambling site since 2012
-          </h2>
+          <div className="relative">
+            <h2 className="display_title display_1 display_1-shadow">
+              Best bitcoin gambling site since 2012
+            </h2>
+            <div className="display_title display_1 glow opacity-50 left-0">
+              Best bitcoin gambling site since 2012
+            </div>
+          </div>
           <div className="grid gap-7 mt-3">
             {
               // start data

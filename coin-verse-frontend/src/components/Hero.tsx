@@ -36,7 +36,6 @@ function Hero() {
 
   return (
     <section className="relative mb-6 md:mb-12">
-      0
       <div
         className="absolute inset-0 blur-xl h-full"
         style={{
@@ -45,10 +44,13 @@ function Hero() {
         }}></div>
       <div className="relative pt-12 pb-10 text-center">
         <div className="max-w-[1100px] mx-auto px-4 py-10 sm:py-16 md:py-20 lg:py-28 overflow-hidden md:px-8 items-center">
-          <div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-[#38E2F9] from-20% via-[#FFACC8] via-50%  to-[#FFF176] to-85% inline-block text-transparent bg-clip-text py-10">
+          <div className="relative">
+            <h1 className="hero_title title_shadow">
               The Ultimate <br /> Bitcoin Betting Experience
             </h1>
+            <div className="hero_title w-[85%] glow left-1/2 -translate-x-1/2 opacity-70">
+              The Ultimate <br /> Bitcoin Betting Experience
+            </div>
           </div>
           <div className="mt-10 inline-block border-4 border-[#a4f08f] rounded-full p-2 get-start__hover duration-300">
             <Link
