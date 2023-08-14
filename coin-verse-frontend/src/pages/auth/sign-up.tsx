@@ -1,7 +1,9 @@
+import UserContext, { UserContextType } from "@/context/userContext";
 import HeadContent from "@/libs/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import logo from "../../assets/logo.png";
@@ -15,8 +17,6 @@ interface SignUpFormInputs {
 const SignUp = () => {
   const router = useRouter();
   const callbackUrl = router.query?.callbackUrl;
-
-  const redirectUser = callbackUrl || "/";
   const navigate = callbackUrl
     ? `/auth/sign-in?callbackUrl=${callbackUrl}`
     : "/auth/sign-in";
@@ -28,10 +28,12 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<SignUpFormInputs>();
 
+  const context: UserContextType = useContext(UserContext);
+
   const onSubmit = async (data: SignUpFormInputs) => {
     const { email, password } = data;
 
-    const res = await fetch("http://localhost:5000/api/v1/auth/signup", {
+    const res = await fetch(`${process.env.url}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,8 +46,9 @@ const SignUp = () => {
     const result = await res.json();
 
     if (result.statusCode === 201 && result.status) {
+      context.setUser(result.data);
       toast.success(result.message);
-      router.push(redirectUser as string);
+      router.replace("/");
     } else {
       toast.error(result.message);
     }

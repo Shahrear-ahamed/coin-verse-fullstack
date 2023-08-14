@@ -1,3 +1,4 @@
+import UserProvider from "@/context/UserProvider";
 import "@/styles/globals.css";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
@@ -16,9 +17,9 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
-    <>
+    <UserProvider>
       {getLayout(<Component {...pageProps} />)}
       <ToastContainer theme="colored" />
-    </>
+    </UserProvider>
   );
 }

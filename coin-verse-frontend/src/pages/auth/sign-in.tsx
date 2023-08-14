@@ -1,7 +1,9 @@
+import UserContext, { UserContextType } from "@/context/userContext";
 import HeadContent from "@/libs/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import logo from "../../assets/logo.png";
@@ -20,6 +22,8 @@ const Login = () => {
     ? `/auth/sign-up?callbackUrl=${callbackUrl}`
     : "/auth/sign-up";
 
+  const context: UserContextType = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -29,7 +33,7 @@ const Login = () => {
   const onSubmit = async (userData: LoginFormInputs) => {
     const { email, password } = userData;
 
-    const res = await fetch("http://localhost:5000/api/v1/auth/login", {
+    const res = await fetch(`${process.env.url}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,6 +47,7 @@ const Login = () => {
     const result = await res.json();
 
     if (result.statusCode === 200 && result.status) {
+      context.setUser(result.data);
       router.push(redirectUser as string);
       toast.success(result.message);
     } else {

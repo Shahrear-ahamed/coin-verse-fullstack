@@ -6,13 +6,14 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import StartFrom from "@/components/StartFrom";
 
+import OfferModal from "@/components/OfferModal";
 import HeadContent from "@/libs/head";
 import type { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <HeadContent />
+      <HeadContent title="Home" />
       <main className="relative">
         <Navbar />
         <Hero />
@@ -21,6 +22,7 @@ const Home: NextPageWithLayout = () => {
         <BestWay />
         <FooterTop />
         <Footer />
+        <OfferModal />
       </main>
     </>
   );
