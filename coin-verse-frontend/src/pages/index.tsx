@@ -6,19 +6,23 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import StartFrom from "@/components/StartFrom";
 
+import HeadContent from "@/libs/head";
 import type { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
   return (
-    <main className="relative">
-      <Navbar />
-      <Hero />
-      <StartFrom />
-      <BestCasino />
-      <BestWay />
-      <FooterTop />
-      <Footer />
-    </main>
+    <>
+      <HeadContent />
+      <main className="relative">
+        <Navbar />
+        <Hero />
+        <StartFrom />
+        <BestCasino />
+        <BestWay />
+        <FooterTop />
+        <Footer />
+      </main>
+    </>
   );
 };
 

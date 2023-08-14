@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -6,12 +5,9 @@ import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const [isNav, setIsNav] = useState(false);
+
   return (
     <>
-      <Head>
-        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-        <title>Coin Verse - Explore the World of Digital Coins</title>
-      </Head>
       <nav className="fixed w-full top-0 z-50 drop__shadow">
         <div className="max-w-screen-xl w-[95%] mx-auto my-5 flex justify-between flex-row">
           <div className="flex-none lg:flex-initial">
