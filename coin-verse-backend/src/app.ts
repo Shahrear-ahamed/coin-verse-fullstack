@@ -8,7 +8,7 @@ import routers from './app/routes'
 const app: Application = express()
 
 // cors middleware
-app.use(cors())
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 // perse middleware
 app.use(cookieParser())

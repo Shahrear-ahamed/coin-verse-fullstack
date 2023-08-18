@@ -3,7 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: false, env: {
     url: process.env.SERVER,
-  }
+  },
+  images: {
+    domains: ["cdn.coinranking.com"],
+  },
 };
 
 module.exports = nextConfig;

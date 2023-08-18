@@ -1,4 +1,5 @@
 import httpStatus from 'http-status'
+import { JwtPayload } from 'jsonwebtoken'
 import config from '../../../config'
 import catchAsync from '../../../shared/catchAsync'
 import sendResponse from '../../../shared/sendResponse'
@@ -6,8 +7,17 @@ import { AuthService } from './auth.service'
 
 const authSignUp = catchAsync(async (req, res) => {
   const userData = req.body
+  const { refreshToken, accessToken, ...result } = await AuthService.authSignUp(
+    userData,
+  )
+  const cookieOptions = {
+    httpOnly: true,
+    secure: config.env === 'production',
+    expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+  }
 
-  const result = await AuthService.authSignUp(userData)
+  res.cookie('token', accessToken, cookieOptions)
+  res.cookie('refreshToken', refreshToken, cookieOptions)
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -19,12 +29,16 @@ const authSignUp = catchAsync(async (req, res) => {
 
 const authLogin = catchAsync(async (req, res) => {
   const userData = req.body
-  const { refreshToken, ...result } = await AuthService.authLogin(userData)
+  const { refreshToken, accessToken, ...result } = await AuthService.authLogin(
+    userData,
+  )
   const cookieOptions = {
     httpOnly: true,
     secure: config.env === 'production',
+    expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
   }
 
+  res.cookie('token', accessToken, cookieOptions)
   res.cookie('refreshToken', refreshToken, cookieOptions)
 
   sendResponse(res, {
@@ -44,6 +58,7 @@ const authRefreshToken = catchAsync(async (req, res) => {
   const cookieOptions = {
     httpOnly: true,
     secure: config.env === 'production',
+    expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
   }
 
   res.cookie('refreshToken', newRefreshToken, cookieOptions)
@@ -74,9 +89,44 @@ const authChangePassword = catchAsync(async (req, res) => {
   })
 })
 
+const currentUser = catchAsync(async (req, res) => {
+  const user = req.user
+
+  const result = await AuthService.currentUser(user as JwtPayload)
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    status: true,
+    message: 'Current user retrieved successfully',
+    data: result,
+  })
+})
+
+const logOut = catchAsync(async (req, res) => {
+  const result = null
+
+  const cookieOptions = {
+    httpOnly: true,
+    secure: config.env === 'production',
+    expires: new Date(0),
+  }
+
+  res.cookie('refreshToken', '', cookieOptions)
+  res.cookie('token', '', cookieOptions)
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    status: true,
+    message: 'User logged out successfully',
+    data: result,
+  })
+})
+
 export const AuthController = {
   authSignUp,
   authLogin,
   authRefreshToken,
   authChangePassword,
+  currentUser,
+  logOut,
 }

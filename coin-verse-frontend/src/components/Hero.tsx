@@ -52,7 +52,7 @@ function Hero() {
               The Ultimate <br /> Bitcoin Betting Experience
             </div>
           </div>
-          <div className="mt-10 inline-block border-4 border-[#a4f08f] rounded-full p-2 get-start__hover duration-300">
+          <div className="mt-10 inline-block border-4 border-[#a4f08f] rounded-full p-[6px] get-start__hover duration-300">
             <Link
               href="/dashboard"
               className="font-bold text-xl md:text-2xl inline-block bg-[#a4f08f] rounded-full px-4 py-5 md:px-10 md:py-7">

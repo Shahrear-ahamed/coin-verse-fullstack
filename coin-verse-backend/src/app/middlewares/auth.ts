@@ -9,8 +9,7 @@ const auth =
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       // get a token and check it
-      const bearerToken = req.headers.authorization
-      const token = bearerToken?.split(' ')[1]
+      const token = req.cookies.token
 
       if (!token) {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorize', '')

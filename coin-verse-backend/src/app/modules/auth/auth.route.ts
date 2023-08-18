@@ -21,6 +21,14 @@ router.post(
   AuthController.authLogin,
 )
 
+// logout user
+router.post(
+  '/logout',
+  auth(USER_ENUM.USER, USER_ENUM.ADMIN, USER_ENUM.SUPER_ADMIN),
+  validateRequest(AuthValidation.refreshTokenZodSchema),
+  AuthController.logOut,
+)
+
 // refresh token
 router.post(
   '/refresh-token',
@@ -34,6 +42,14 @@ router.post(
   auth(USER_ENUM.USER, USER_ENUM.ADMIN, USER_ENUM.SUPER_ADMIN),
   validateRequest(AuthValidation.changePasswordZodSchema),
   AuthController.authChangePassword,
+)
+
+// current user
+router.get(
+  '/current-user',
+  auth(USER_ENUM.USER, USER_ENUM.ADMIN, USER_ENUM.SUPER_ADMIN),
+  validateRequest(AuthValidation.refreshTokenZodSchema),
+  AuthController.currentUser,
 )
 
 export const AuthRoutes = router

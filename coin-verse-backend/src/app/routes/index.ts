@@ -1,6 +1,7 @@
 import express from 'express'
 import { AdminRoutes } from '../modules/admin/admin.routes'
 import { AuthRoutes } from '../modules/auth/auth.route'
+import { CryptoRouters } from '../modules/cryptoCurrency/crypto.router'
 import { UserRoutes } from '../modules/user/user.route'
 
 const router = express.Router()
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/admin',
     route: AdminRoutes,
+  },
+  {
+    path: '/crypto',
+    route: CryptoRouters,
   },
 ]
 

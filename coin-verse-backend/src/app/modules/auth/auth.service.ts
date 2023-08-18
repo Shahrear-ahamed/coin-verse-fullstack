@@ -1,4 +1,5 @@
 import httpStatus from 'http-status'
+import { JwtPayload } from 'jsonwebtoken'
 import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 import config from '../../../config'
@@ -11,7 +12,7 @@ import Auth from './auth.model'
 
 const authSignUp = async (payload: IUser) => {
   let userReturn
-  const signUpBonus = 10
+  const signUpBonus = 20
 
   // create unique id
   const userId = uuidv4()
@@ -57,8 +58,15 @@ const authSignUp = async (payload: IUser) => {
       config.jwt_secret as string,
       config.jwt_expired as string,
     )
+    const refreshToken = await JwtHelpers.createToken(
+      userDetails,
+      config.jwt_refresh_secret as string,
+      config.jwt_refresh_expired as string,
+    )
 
-    userReturn = { userId, accessToken }
+    const result = { ...user.toObject(), role: auth.role }
+
+    userReturn = { ...result, accessToken, refreshToken }
 
     // commit transaction and end transaction
     await session.commitTransaction()
@@ -77,8 +85,9 @@ const authLogin = async (payload: IAuth) => {
 
   // check user exist
   const isUserExist = await Auth.isUserExist(email)
+  const user = await User.findOne({ email })
 
-  if (!isUserExist) {
+  if (!isUserExist && user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
   }
 
@@ -109,8 +118,11 @@ const authLogin = async (payload: IAuth) => {
     config.jwt_refresh_secret as string,
     config.jwt_refresh_expired as string,
   )
+
+  const result = { ...user?.toObject(), userId: isUserExist.userId }
+
   return {
-    userId: isUserExist.userId,
+    ...result,
     accessToken,
     refreshToken,
   }
@@ -199,9 +211,23 @@ const authChangePassword = async (payload: IAuthChangePassword) => {
   return changePassword
 }
 
+const currentUser = async (tokenUser: JwtPayload) => {
+  const { userId } = tokenUser
+
+  const auth = await Auth.findOne({ userId })
+  const user = await User.findOne({ userId })
+
+  if (!auth && !user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
+  }
+
+  return { ...user?.toObject(), role: auth?.role }
+}
+
 export const AuthService = {
   authSignUp,
   authLogin,
   authRefreshToken,
   authChangePassword,
+  currentUser,
 }
