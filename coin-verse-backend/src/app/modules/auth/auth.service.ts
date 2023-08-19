@@ -188,7 +188,7 @@ const authChangePassword = async (payload: IAuthChangePassword) => {
   const passMatch = await Auth.matchPassword(oldPassword, isUserExist.password)
 
   if (!passMatch) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Old password is wrong', '')
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Current password is wrong', '')
   }
 
   // update password

@@ -8,10 +8,7 @@ const userSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
-    firstName: {
-      type: String,
-    },
-    lastName: {
+    name: {
       type: String,
     },
     contactNo: {

@@ -65,6 +65,10 @@ body {
     position: absolute;
     top: 0;
   }
+
+  .eye_color > path {
+    @apply text-gray-700;
+  }
 }
 
 /* custom css */
@@ -145,10 +149,21 @@ body {
 .coins_mask {
   mask-image: linear-gradient(
     to bottom,
-    hsla(0, 0%, 0%, 1) 10%, /* Adjust the percentage for the black portion */
-    hsla(0, 0%, 0%, 0) 90%,
+    hsla(0, 0%, 0%, 1) 10%,
+    /* Adjust the percentage for the black portion */ hsla(0, 0%, 0%, 0) 90%,
     hsl(0 0% 0% / 0)
   );
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

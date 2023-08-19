@@ -3,8 +3,7 @@ import { Model } from 'mongoose'
 
 export type IUser = {
   userId: string
-  firstName: string
-  lastName: string
+  name: string
   email: string
   contactNo: string
   dateOfBirth: Date

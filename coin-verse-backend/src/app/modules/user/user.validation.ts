@@ -6,4 +6,12 @@ const getProfileZodSchema = z.object({
   }),
 })
 
-export const UserValidation = { getProfileZodSchema }
+const updateProfileZodSchema = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    contactNo: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+  }),
+})
+
+export const UserValidation = { getProfileZodSchema, updateProfileZodSchema }

@@ -21,8 +21,6 @@ const DashboardNav: React.FC<HeaderProps> = ({
   isNotificationsMenuOpen,
   isDarkMode,
 }) => {
-  
-
   return (
     <header className="z-30 py-4 h-16 bg-white shadow-md dark:bg-gray-800">
       <div className="container flex items-center justify-between h-full px-6 mx-auto text-[#a4f08f] dark:text-[#a4f08f]">
@@ -49,8 +47,6 @@ const DashboardNav: React.FC<HeaderProps> = ({
               clipRule="evenodd"></path>
           </svg>
         </button>
-        {/* Rest of the header content */}
-        {/* ... */}
       </div>
     </header>
   );

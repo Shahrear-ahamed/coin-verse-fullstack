@@ -18,10 +18,9 @@ function DashboardLayout({
   const context: UserContextType = useContext(UserContext);
 
   const router = useRouter();
-  const pathName = router?.pathname?.split("/")[1];
-  const coTitle = pathName.split("-").join(" ");
+  const path = router?.pathname.slice(1);
 
-  const title = coTitle.charAt(0).toUpperCase() + coTitle.slice(1);
+  const title = path.charAt(0).toUpperCase() + path.slice(1);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
@@ -75,7 +74,7 @@ function DashboardLayout({
           isSideMenuOpen={isSideMenuOpen}
           toggleSideMenu={toggleSideMenu}
         />
-        <div className="mt-5 md:mt-10 max-w-[1200px] w-[95%] mx-auto">
+        <div className="my-5 md:my-10 max-w-[1200px] overflow-y-auto w-full px-5 mx-auto">
           {children}
         </div>
       </main>
