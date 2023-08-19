@@ -50,8 +50,8 @@ export default function HomeCryptoCoins({
                   <td
                     className={`${
                       Number(coin.change) > 0
-                        ? "text-green-700"
-                        : "text-red-700"
+                      ? "text-[#07ef74]"
+                      : "text-[#ff314a]"
                     } px-4 py-4`}>
                     {coin.change}%
                   </td>

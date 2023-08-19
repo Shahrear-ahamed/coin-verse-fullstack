@@ -9,7 +9,7 @@ const auth =
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       // get a token and check it
-      const token = req.cookies.token
+      const token = await req.cookies.token
 
       if (!token) {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorize', '')
@@ -22,7 +22,11 @@ const auth =
       )
 
       if (!verifyToken) {
-        throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorize', '')
+        throw new ApiError(
+          httpStatus.UNAUTHORIZED,
+          'You are not verified for this route',
+          '',
+        )
       }
 
       // after verification user are auth for this route?

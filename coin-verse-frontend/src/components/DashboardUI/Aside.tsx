@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { BiHome } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FiUsers } from "react-icons/fi";
+import { SiBitcoin } from "react-icons/si";
 
 interface AsideProps {
   isSideMenuOpen: boolean;
@@ -22,18 +23,32 @@ const sideBar = [
     icon: CgProfile,
     link: "/dashboard/profile",
   },
+  {
+    name: "Coins",
+    icon: SiBitcoin,
+    link: "/dashboard/coins",
+  },
+];
+
+const adminRoute = [
+  {
+    name: "Users",
+    icon: FiUsers,
+    link: "/dashboard/users",
+  },
 ];
 
 const Aside: React.FC<AsideProps> = ({ isSideMenuOpen, toggleSideMenu }) => {
   const router = useRouter();
   const context: UserContextType = useContext(UserContext);
 
-  if (context?.user?.role === "admin") {
-    sideBar.push({
-      name: "Users",
-      icon: FiUsers,
-      link: "/dashboard/users",
-    });
+  let routesToRender = [...sideBar];
+
+  if (
+    context?.user?.role === "admin" ||
+    context?.user?.role === "super-admin"
+  ) {
+    routesToRender = [...routesToRender, ...adminRoute];
   }
 
   return (
@@ -41,7 +56,7 @@ const Aside: React.FC<AsideProps> = ({ isSideMenuOpen, toggleSideMenu }) => {
       <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block max-h-full">
         <div className="py-4 text-gray-500 dark:text-gray-400">
           <ul className="mt-6">
-            {sideBar.map((item, index) => (
+            {routesToRender.map((item, index) => (
               <li key={index} className="relative px-6 py-3">
                 {item.link === router.pathname && (
                   <span

@@ -6,6 +6,7 @@ export type IAuth = {
   email: string
   password: string
   role: string
+  showSignUpBonus: boolean
   passwordChangedAt: Date
 }
 

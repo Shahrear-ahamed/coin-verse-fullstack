@@ -7,12 +7,12 @@ import ApiError from '../../../errors/ApiErrors'
 import { JwtHelpers } from '../../../helpers/JwtHelpers'
 import { IUser } from '../user/user.interface'
 import User from '../user/user.model'
+import Wallet from '../wallet/wallet.model'
 import { IAuth, IAuthChangePassword } from './auth.interface'
 import Auth from './auth.model'
 
 const authSignUp = async (payload: IUser) => {
   let userReturn
-  const signUpBonus = 20
 
   // create unique id
   const userId = uuidv4()
@@ -32,11 +32,17 @@ const authSignUp = async (payload: IUser) => {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to create user', '')
     }
 
+    const wallet = await Wallet.create([{ userId }], { session })
+
+    if (!wallet.length) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to create wallet', '')
+    }
+
     // set user id into user, create user and throw error
     const preUserDetails = {
       userId,
       email: payload?.email,
-      balance: signUpBonus,
+      wallet: wallet[0]._id,
     }
     const newUser = await User.create([preUserDetails], { session })
 

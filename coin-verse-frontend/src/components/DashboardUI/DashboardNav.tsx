@@ -4,22 +4,10 @@ import logo from "../../assets/logo.png";
 
 interface HeaderProps {
   toggleSideMenu: () => void;
-  toggleProfileMenu: () => void;
-  toggleNotificationsMenu: () => void;
-  toggleTheme: () => void;
-  isProfileMenuOpen: boolean;
-  isNotificationsMenuOpen: boolean;
-  isDarkMode: boolean;
 }
 
 const DashboardNav: React.FC<HeaderProps> = ({
-  toggleSideMenu,
-  toggleProfileMenu,
-  toggleNotificationsMenu,
-  toggleTheme,
-  isProfileMenuOpen,
-  isNotificationsMenuOpen,
-  isDarkMode,
+  toggleSideMenu
 }) => {
   return (
     <header className="z-30 py-4 h-16 bg-white shadow-md dark:bg-gray-800">

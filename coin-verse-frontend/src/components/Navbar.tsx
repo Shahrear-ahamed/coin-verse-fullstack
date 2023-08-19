@@ -27,6 +27,10 @@ export default function Navbar() {
     } catch (err) {}
   };
 
+  const handleDashboard = () => {
+    window.location.href = "/dashboard";
+  };
+
   return (
     <>
       <nav className="fixed w-full top-0 z-50 drop__shadow">
@@ -45,11 +49,11 @@ export default function Navbar() {
             <div className="grid justify-between gap-2 md:gap-5 grid-cols-2 items-center sm:grid-cols-2">
               {context?.user?.userId ? (
                 <>
-                  <Link
-                    href="/dashboard"
+                  <button
+                    onClick={handleDashboard}
                     className="px-3 py-2 md:py-4 md:px-7 rounded-full text-xs md:text-lg font-medium bg-[#2C343D] hover:bg-[#323b46] duration-300">
                     Dashboard
-                  </Link>
+                  </button>
                   <button
                     onClick={handleLogout}
                     className="px-1 py-2  md:py-4 md:px-7 rounded-full text-xs md:text-lg font-medium bg-[#A4F08F] text-[#1A1D20] sign-up__hover duration-300">

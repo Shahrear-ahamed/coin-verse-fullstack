@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose'
+import { Model, Schema } from 'mongoose'
 
 export type IUser = {
   userId: string
@@ -7,7 +7,7 @@ export type IUser = {
   email: string
   contactNo: string
   dateOfBirth: Date
-  balance: number
+  walletId: Schema.Types.ObjectId
 }
 
 export type UserModel = Model<IUser>

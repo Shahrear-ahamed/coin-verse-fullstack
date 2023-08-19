@@ -23,32 +23,15 @@ function DashboardLayout({
   const title = path.charAt(0).toUpperCase() + path.slice(1);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
-  const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] =
-    useState<boolean>(false);
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
   };
 
-  const toggleProfileMenu = () => {
-    setIsProfileMenuOpen(!isProfileMenuOpen);
-  };
-
-  const toggleNotificationsMenu = () => {
-    setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
-  };
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    // Add logic to toggle dark mode here
-  };
-
   // check user admin or other user
   if (
-    context?.user?.role === "admin" ||
-    ("super-admin" && adminRoute.includes(router.pathname))
+    !(context?.user?.role === "admin" || "super-admin") &&
+    !adminRoute.includes(router.pathname)
   ) {
     return (
       <>
@@ -60,15 +43,7 @@ function DashboardLayout({
   return (
     <div className="h-screen flex flex-col">
       <HeadContent title={title} description={description} />
-      <DashboardNav
-        toggleSideMenu={toggleSideMenu}
-        toggleProfileMenu={toggleProfileMenu}
-        toggleNotificationsMenu={toggleNotificationsMenu}
-        toggleTheme={toggleTheme}
-        isProfileMenuOpen={isProfileMenuOpen}
-        isNotificationsMenuOpen={isNotificationsMenuOpen}
-        isDarkMode={isDarkMode}
-      />
+      <DashboardNav toggleSideMenu={toggleSideMenu} />
       <main className="relative flex-1 overflow-y-auto flex gap-10">
         <Aside
           isSideMenuOpen={isSideMenuOpen}

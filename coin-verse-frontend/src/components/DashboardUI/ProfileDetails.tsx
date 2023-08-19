@@ -48,7 +48,7 @@ function ProfileDetails({ context }: { context: UserContextType }) {
   };
 
   return (
-    <div className="w-full max-w-[370px]">
+    <div className="w-full max-w-[370px] border border-white rounded-md shadow-lg shadow-gray-800 p-7">
       <h4 className="text-xl text-white mb-10">Personal Details</h4>
       <form
         className="flex flex-col space-y-5 items-center "

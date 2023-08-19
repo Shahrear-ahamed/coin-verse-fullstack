@@ -8,7 +8,6 @@ const getMyProfile = (payload: string) => {
 const updateMyProfile = async (userId: string, body: IUser) => {
   return await User.findOneAndUpdate({ userId }, body, { new: true }).select({
     _id: 0,
-    balance: 0,
   })
 }
 

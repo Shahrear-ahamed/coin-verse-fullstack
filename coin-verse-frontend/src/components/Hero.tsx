@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BsChevronDown, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 import Image from "next/image";
@@ -34,6 +33,10 @@ function Hero() {
     { name: "pax gold", image: paxGold },
   ];
 
+  const handleDashboard = () => {
+    window.location.href = "/dashboard";
+  };
+
   return (
     <section className="relative mb-6 md:mb-12">
       <div
@@ -53,8 +56,8 @@ function Hero() {
             </div>
           </div>
           <div className="mt-10 inline-block border-4 border-[#a4f08f] rounded-full p-[6px] get-start__hover duration-300">
-            <Link
-              href="/dashboard"
+            <button
+              onClick={handleDashboard}
               className="font-bold text-xl md:text-2xl inline-block bg-[#a4f08f] rounded-full px-4 py-5 md:px-10 md:py-7">
               <div className="flex text-[#1A1D20]">
                 Get Start
@@ -62,7 +65,7 @@ function Hero() {
                   <BsFillArrowRightCircleFill fill="#1A1D20" />
                 </div>
               </div>
-            </Link>
+            </button>
           </div>
 
           <div className="relative flex justify-between w-full md:max-w-[820px] mx-auto mt-16">

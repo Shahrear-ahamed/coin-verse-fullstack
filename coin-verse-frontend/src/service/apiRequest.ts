@@ -23,3 +23,26 @@ export const changePassword = async (data: any) => {
 
   return await response.json();
 };
+
+export const allCoins = async ({
+  limit,
+  page,
+}: {
+  limit: number;
+  page: number;
+}) => {
+  const res = await fetch(
+    `${process.env.url}/crypto/crypto-coins?limit=${limit}&page=${page}`,
+    {
+      credentials: "include",
+    }
+  );
+  return await res.json();
+};
+
+export const getAllUsers = async () => {
+  const res = await fetch(`${process.env.url}/admin/all-users`, {
+    credentials: "include",
+  });
+  return await res.json();
+};

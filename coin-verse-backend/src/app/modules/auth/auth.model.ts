@@ -27,6 +27,10 @@ const authSchema = new Schema<IAuth>(
       type: Date,
       default: Date.now(),
     },
+    showSignUpBonus: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
