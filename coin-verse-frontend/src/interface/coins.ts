@@ -40,6 +40,13 @@ export interface Data {
   coins: Coin[];
 }
 
+export type CoinsData = {
+  statusCode: number;
+  status: string;
+  message: string;
+  data: Coin[];
+};
+
 export interface IUser {
   userId: string;
   email: string;

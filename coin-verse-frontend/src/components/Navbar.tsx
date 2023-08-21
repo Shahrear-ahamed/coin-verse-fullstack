@@ -26,7 +26,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed w-full top-0 z-50 drop__shadow">
+      <nav className="fixed w-full top-0 z-[999] drop__shadow">
         <div className="max-w-screen-xl w-[95%] mx-auto my-5 flex justify-between flex-row">
           <div className="flex items-center">
             <Link href="/">

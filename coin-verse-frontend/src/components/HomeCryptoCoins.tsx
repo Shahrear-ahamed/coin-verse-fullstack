@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CoinsData } from "@/pages";
+import { CoinsData } from "@/interface/coins";
 import { useRouter } from "next/router";
 
 export default function HomeCryptoCoins({

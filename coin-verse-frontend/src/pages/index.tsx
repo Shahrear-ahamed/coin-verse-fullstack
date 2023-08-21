@@ -13,37 +13,25 @@ import HeadContent from "@/libs/head";
 import { homePage } from "@/service/apiRequest";
 import type { InferGetServerSidePropsType } from "next";
 
-export type CoinData = {
-  uuid: string;
-  symbol: string;
-  name: string;
-  color: string;
-  iconUrl: string;
-  marketCap: string;
-  price: string;
-  listedAt: number;
-  tier: number;
-  change: string;
-  rank: number;
-  sparkline: string[];
-  lowVolume: boolean;
-  coinrankingUrl: string;
-  _24hVolume: string;
-  btcPrice: string;
-};
+// export const getServerSideProps = async () => {
+//   try {
+//     const coinsData = await homePage();
 
-export type CoinsData = {
-  statusCode: number;
-  status: string;
-  message: string;
-  data: CoinData[];
-};
+//     return { props: { coinsData } };
+//   } catch (error) {
+//     // Handle the error appropriately
+//     console.error("Error fetching data:", error);
+//     return {
+//       props: { error: "Failed to fetch data" },
+//     };
+//   }
+// };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   try {
     const coinsData = await homePage();
 
-    return { props: { coinsData } };
+    return { props: { coinsData }, revalidate: 60 };
   } catch (error) {
     // Handle the error appropriately
     console.error("Error fetching data:", error);
@@ -55,7 +43,7 @@ export const getServerSideProps = async () => {
 
 export default function Home({
   coinsData,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetServerSidePropsType<typeof getStaticProps>) {
   return (
     <>
       <HeadContent title="Home" />
