@@ -12,7 +12,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-
 /* 
 ::-webkit-scrollbar {
   width: 6px;
@@ -68,8 +67,13 @@ body {
     top: 0;
   }
 
-  .eye_color > path {
+  .eye_color > path,
+  .options > option {
     @apply text-gray-700;
+  }
+
+  .addWalletIcon > path {
+    @apply text-gray-800;
   }
 }
 

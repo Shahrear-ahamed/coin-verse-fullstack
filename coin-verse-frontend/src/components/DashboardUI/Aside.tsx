@@ -66,7 +66,6 @@ const Aside: React.FC<AsideProps> = ({ isSideMenuOpen, toggleSideMenu }) => {
                 <Link
                   href={item.link}
                   className="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100">
-                  {/* {item.icon} */}
                   <item.icon style={{ fontSize: "20px" }} />
                   <span className="ml-4">{item.name}</span>
                 </Link>

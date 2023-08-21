@@ -44,6 +44,13 @@ router.post(
   AuthController.authChangePassword,
 )
 
+// close modal
+router.post(
+  '/close-modal',
+  auth(USER_ENUM.USER, USER_ENUM.ADMIN, USER_ENUM.SUPER_ADMIN),
+  AuthController.closeModal,
+)
+
 // current user
 router.get(
   '/current-user',

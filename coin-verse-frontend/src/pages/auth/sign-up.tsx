@@ -1,5 +1,6 @@
 import UserContext, { UserContextType } from "@/context/userContext";
 import HeadContent from "@/libs/head";
+import { signUp } from "@/service/apiRequest";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,27 +32,22 @@ const SignUp = () => {
   const context: UserContextType = useContext(UserContext);
 
   const onSubmit = async (data: SignUpFormInputs) => {
-    const { email, password } = data;
+    const { email, password, confirmPassword } = data;
 
-    const res = await fetch(`${process.env.url}/auth/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    const result = await res.json();
+    if (password !== confirmPassword) {
+      toast.error("Your passwords do no match");
+      return;
+    }
+
+    const result = await signUp({ email, password });
 
     if (result.statusCode === 201 && result.status) {
       context.setUser(result.data);
       toast.success(result.message);
       router.replace("/");
-    } else {
-      toast.error(result.message);
+      return;
     }
+    toast.error(result.message);
   };
 
   return (

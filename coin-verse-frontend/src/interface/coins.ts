@@ -45,6 +45,12 @@ export interface IUser {
   email: string;
   role: string;
   password: string;
+  wallet: {
+    balance: number;
+    walletName: string;
+    email: string;
+    password: string;
+  };
 }
 
 export interface Response<T> {

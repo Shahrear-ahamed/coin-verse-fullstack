@@ -23,19 +23,21 @@ const authSignUp = async (payload: IUser) => {
     // start transaction
     session.startTransaction()
 
-    const userPayload = { ...payload, userId }
+    // create a wallet if fail throw error
+    const wallet = await Wallet.create([{ userId }], { session })
+
+    if (!wallet.length) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to create wallet', '')
+    }
+
+    // set wallet id into user
+    const userPayload = { ...payload, userId, wallet: wallet[0]._id }
 
     // create a auth if fail throw error
     const newAuth = await Auth.create([userPayload], { session })
 
     if (!newAuth.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to create user', '')
-    }
-
-    const wallet = await Wallet.create([{ userId }], { session })
-
-    if (!wallet.length) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Fail to create wallet', '')
     }
 
     // set user id into user, create user and throw error
@@ -222,12 +224,39 @@ const currentUser = async (tokenUser: JwtPayload) => {
 
   const auth = await Auth.findOne({ userId })
   const user = await User.findOne({ userId })
+  const wallet = await Wallet.findOne(
+    { userId },
+    { _id: 0, userId: 0, createdAt: 0, updatedAt: 0 },
+  )
 
   if (!auth && !user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
   }
 
-  return { ...user?.toObject(), role: auth?.role }
+  return {
+    ...user?.toObject(),
+    ...wallet?.toObject(),
+    role: auth?.role,
+    showSignUpBonus: auth?.showSignUpBonus,
+  }
+}
+
+const closeModal = async (userId: string) => {
+  const auth = await Auth.findOneAndUpdate(
+    {
+      userId,
+    },
+    {
+      showSignUpBonus: false,
+    },
+    { new: true },
+  )
+
+  if (!auth) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
+  }
+
+  return auth
 }
 
 export const AuthService = {
@@ -236,4 +265,5 @@ export const AuthService = {
   authRefreshToken,
   authChangePassword,
   currentUser,
+  closeModal,
 }

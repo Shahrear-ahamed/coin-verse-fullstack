@@ -7,7 +7,7 @@ export type IUser = {
   email: string
   contactNo: string
   dateOfBirth: Date
-  walletId: Schema.Types.ObjectId
+  wallet: Schema.Types.ObjectId
 }
 
 export type UserModel = Model<IUser>

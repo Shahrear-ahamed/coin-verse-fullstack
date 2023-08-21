@@ -1,13 +1,14 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 
 type IUser = {
-  userId: string;
+  role: string;
   name: string;
   email: string;
+  userId: string;
   contactNo: string;
   dateOfBirth: Date;
   balance: number;
-  role: string;
+  showSignUpBonus: boolean;
 };
 
 export interface UserContextType {

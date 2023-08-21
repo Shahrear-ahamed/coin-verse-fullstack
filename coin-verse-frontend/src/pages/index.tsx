@@ -10,7 +10,8 @@ import HomeCryptoCoins from "@/components/HomeCryptoCoins";
 import OfferModal from "@/components/OfferModal";
 import HeadContent from "@/libs/head";
 
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { homePage } from "@/service/apiRequest";
+import type { InferGetServerSidePropsType } from "next";
 
 export type CoinData = {
   uuid: string;
@@ -38,12 +39,18 @@ export type CoinsData = {
   data: CoinData[];
 };
 
-export const getServerSideProps: GetServerSideProps<{
-  coinsData: CoinsData;
-}> = async () => {
-  const res = await fetch(`${process.env.url}/crypto/home`);
-  const coinsData = await res.json();
-  return { props: { coinsData } };
+export const getServerSideProps = async () => {
+  try {
+    const coinsData = await homePage();
+
+    return { props: { coinsData } };
+  } catch (error) {
+    // Handle the error appropriately
+    console.error("Error fetching data:", error);
+    return {
+      props: { error: "Failed to fetch data" },
+    };
+  }
 };
 
 export default function Home({
@@ -55,7 +62,7 @@ export default function Home({
       <main className="relative">
         <Navbar />
         <Hero />
-        <HomeCryptoCoins coinsData={coinsData} />
+        {coinsData?.status && <HomeCryptoCoins coinsData={coinsData} />}
         <StartFrom />
         <BestCasino />
         <BestWay />

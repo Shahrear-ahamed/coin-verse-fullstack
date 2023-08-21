@@ -23,6 +23,12 @@ const authSchema = new Schema<IAuth>(
       enum: userRole,
       default: USER_ENUM.USER,
     },
+    wallet: {
+      type: Schema.Types.ObjectId,
+      ref: 'Wallet',
+      required: true,
+      unique: true,
+    },
     passwordChangedAt: {
       type: Date,
       default: Date.now(),

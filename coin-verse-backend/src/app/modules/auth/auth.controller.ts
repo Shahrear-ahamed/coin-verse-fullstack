@@ -122,6 +122,17 @@ const logOut = catchAsync(async (req, res) => {
   })
 })
 
+const closeModal = catchAsync(async (req, res) => {
+  const result = await AuthService.closeModal(req?.user?.userId as string)
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    status: true,
+    message: 'Modal closed successfully',
+    data: result,
+  })
+})
+
 export const AuthController = {
   authSignUp,
   authLogin,
@@ -129,4 +140,5 @@ export const AuthController = {
   authChangePassword,
   currentUser,
   logOut,
+  closeModal,
 }

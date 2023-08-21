@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import Aside from "../DashboardUI/Aside";
 import DashboardNav from "../DashboardUI/DashboardNav";
+import GotOfferModule from "../GotOfferModule";
 
 const adminRoute = ["/dashboard/users"];
 
@@ -53,6 +54,7 @@ function DashboardLayout({
           {children}
         </div>
       </main>
+      <GotOfferModule showModal={context?.user?.showSignUpBonus!} />
     </div>
   );
 }

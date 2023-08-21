@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose'
+import { Model, Schema } from 'mongoose'
 
 export type IAuth = {
   userId: string
   email: string
   password: string
   role: string
+  wallet: Schema.Types.ObjectId
   showSignUpBonus: boolean
   passwordChangedAt: Date
 }

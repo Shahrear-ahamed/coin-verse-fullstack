@@ -22,9 +22,11 @@ const userSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
-    walletId: {
+    wallet: {
       type: Schema.Types.ObjectId,
       ref: 'Wallet',
+      required: true,
+      unique: true,
     },
   },
   {

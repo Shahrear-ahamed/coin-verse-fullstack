@@ -1,3 +1,4 @@
+import { getProfile } from "@/service/apiRequest";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import UserContext from "./userContext";
@@ -8,11 +9,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const getCurrentUser = async () => {
       try {
-        const response = await fetch(`${process.env.url}/auth/current-user`, {
-          method: "GET",
-          credentials: "include",
-        });
-        const currentUser = await response.json();
+        const currentUser = await getProfile();
 
         setUser({ ...currentUser?.data });
       } catch (err) {

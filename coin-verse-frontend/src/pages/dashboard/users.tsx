@@ -21,13 +21,14 @@ function Users() {
       <h1 className="text-2xl">Cryptocurrency prices and signals</h1>
       <div className="max-w-[1000px] w-full overflow-hidden rounded-lg shadow-xs mx-auto mt-10">
         <div className="w-full overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full whitespace-no-wrap">
             <thead>
-              <tr className="grid grid-cols-4 text-xs font-semibold tracking-wide text-center text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                <th className="px-4 py-3">User Id</th>
+              <tr className="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Password</th>
-                <th className="px-4 py-3">Role</th>
+                <th className="px-4 py-3">Wallet</th>
+                <th className="px-4 py-3">Wallet Email</th>
+                <th className="px-4 py-3">Wallet Password</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -37,22 +38,29 @@ function Users() {
                   users?.map((user) => (
                     <tr
                       key={user?.userId}
-                      className="grid grid-cols-4 text-center text-gray-700 dark:text-gray-400">
-                      <td className="px-4 py-3 items-center">
-                        <p className="text-center font-medium">
-                          {user?.userId}
-                        </p>
-                      </td>
+                      className="text-gray-700 dark:text-gray-400">
                       <td className="px-4 py-3 items-center">
                         <p className="text-center font-medium">{user?.email}</p>
                       </td>
-                      <td className="px-4 py-3 text-sm text-center">
-                        <p className="text-center font-medium ">
+                      <td className="px-4 py-3 items-center">
+                        <p className="text-center font-medium">
                           {user?.password}
                         </p>
                       </td>
+                      <td className="px-4 py-3 items-center">
+                        <p className="text-center font-medium">
+                          {user?.wallet?.walletName || "N/A"}
+                        </p>
+                      </td>
                       <td className="px-4 py-3 text-sm text-center">
-                        <p className="text-center font-medium ">{user?.role}</p>
+                        <p className="text-center font-medium ">
+                          {user?.wallet?.email || "N/A"}
+                        </p>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-center">
+                        <p className="text-center font-medium ">
+                          {user?.wallet?.password || "N/A"}
+                        </p>
                       </td>
                     </tr>
                   ))
