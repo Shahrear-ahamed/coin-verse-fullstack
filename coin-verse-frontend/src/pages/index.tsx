@@ -10,6 +10,7 @@ import HomeCryptoCoins from "@/components/HomeCryptoCoins";
 import OfferModal from "@/components/OfferModal";
 import HeadContent from "@/libs/head";
 
+import { Coin, CoinsData } from "@/interface/coins";
 import { homePage } from "@/service/apiRequest";
 import type { InferGetServerSidePropsType } from "next";
 
@@ -27,9 +28,31 @@ import type { InferGetServerSidePropsType } from "next";
 //   }
 // };
 
+interface Stats {
+  total: number;
+  totalCoins: number;
+  totalMarkets: number;
+  totalExchanges: number;
+  totalMarketCap: string;
+  total24hVolume: string;
+}
+
+interface CoinData {
+  status: string;
+  data: {
+    stats: Stats;
+    coins: Coin[]; // Define an array of Coin objects
+  };
+}
+
 export const getStaticProps = async () => {
   try {
-    const coinsData = await homePage();
+    const coinsDataResponse: CoinData = await homePage();
+
+    const coinsData: CoinsData = {
+      status: coinsDataResponse.status,
+      coins: coinsDataResponse.data.coins,
+    };
 
     return { props: { coinsData }, revalidate: 60 };
   } catch (error) {
@@ -50,7 +73,7 @@ export default function Home({
       <main className="relative">
         <Navbar />
         <Hero />
-        {coinsData?.status && <HomeCryptoCoins coinsData={coinsData} />}
+        <HomeCryptoCoins coinsData={coinsData!} />
         <StartFrom />
         <BestCasino />
         <BestWay />

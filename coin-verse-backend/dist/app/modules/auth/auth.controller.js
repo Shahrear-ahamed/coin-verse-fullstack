@@ -32,13 +32,19 @@ const auth_service_1 = require("./auth.service");
 const authSignUp = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userData = req.body;
     const _a = yield auth_service_1.AuthService.authSignUp(userData), { refreshToken, accessToken } = _a, result = __rest(_a, ["refreshToken", "accessToken"]);
-    const cookieOptions = {
+    res.cookie('token', accessToken, {
         httpOnly: true,
         secure: config_1.default.env === 'production',
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    };
-    res.cookie('token', accessToken, cookieOptions);
-    res.cookie('refreshToken', refreshToken, cookieOptions);
+        sameSite: 'none',
+    });
+    res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: config_1.default.env === 'production',
+        expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+        sameSite: 'none',
+    });
+    console.log(res.cookie);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.CREATED,
         status: true,
@@ -49,13 +55,19 @@ const authSignUp = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 const authLogin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userData = req.body;
     const _b = yield auth_service_1.AuthService.authLogin(userData), { refreshToken, accessToken } = _b, result = __rest(_b, ["refreshToken", "accessToken"]);
-    const cookieOptions = {
+    res.cookie('token', accessToken, {
         httpOnly: true,
         secure: config_1.default.env === 'production',
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    };
-    res.cookie('token', accessToken, cookieOptions);
-    res.cookie('refreshToken', refreshToken, cookieOptions);
+        sameSite: 'none',
+    });
+    res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: config_1.default.env === 'production',
+        expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+        sameSite: 'none',
+    });
+    console.log(res.cookie);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         status: true,

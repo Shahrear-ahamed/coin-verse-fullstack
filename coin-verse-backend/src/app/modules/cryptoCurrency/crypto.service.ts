@@ -1,3 +1,5 @@
+import config from '../../../config'
+
 type Crypto = {
   status: string
   data: {
@@ -18,8 +20,16 @@ const homeCryptos = async () => {
     }
   }
 
-  const response = await fetch('https://api.coinranking.com/v2/coins?limit=14')
+  const response = await fetch(`${config.cryptoSite}?limit=14`, {
+    headers: {
+      'x-access-token': config.cryptoToken!,
+    },
+  })
   const result: Crypto = await response.json()
+
+  if (result.status !== 'success') {
+    throw new Error('Error fetching data')
+  }
 
   return result.data.coins
 }
@@ -30,7 +40,12 @@ const coins = async ({ limit, page }: { limit: string; page: string }) => {
   const skip = (dataPage - 1) * dataLimit
 
   const response = await fetch(
-    `https://api.coinranking.com/v2/coins?limit=${dataLimit}&offset=${skip}`,
+    `${config.cryptoSite}?limit=${dataLimit}&offset=${skip}`,
+    {
+      headers: {
+        'x-access-token': config.cryptoToken!,
+      },
+    },
   )
   const result: Crypto = await response.json()
 

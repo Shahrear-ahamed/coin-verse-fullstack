@@ -10,14 +10,21 @@ const authSignUp = catchAsync(async (req, res) => {
   const { refreshToken, accessToken, ...result } = await AuthService.authSignUp(
     userData,
   )
-  const cookieOptions = {
+
+  res.cookie('token', accessToken, {
     httpOnly: true,
     secure: config.env === 'production',
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-  }
+    sameSite: 'none',
+  })
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    secure: config.env === 'production',
+    expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+    sameSite: 'none',
+  })
 
-  res.cookie('token', accessToken, cookieOptions)
-  res.cookie('refreshToken', refreshToken, cookieOptions)
+  console.log(res.cookie)
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -32,14 +39,21 @@ const authLogin = catchAsync(async (req, res) => {
   const { refreshToken, accessToken, ...result } = await AuthService.authLogin(
     userData,
   )
-  const cookieOptions = {
+
+  res.cookie('token', accessToken, {
     httpOnly: true,
     secure: config.env === 'production',
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-  }
+    sameSite: 'none',
+  })
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    secure: config.env === 'production',
+    expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+    sameSite: 'none',
+  })
 
-  res.cookie('token', accessToken, cookieOptions)
-  res.cookie('refreshToken', refreshToken, cookieOptions)
+  console.log(res.cookie)
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

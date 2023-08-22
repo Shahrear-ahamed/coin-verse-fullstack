@@ -8,7 +8,13 @@ import routers from './app/routes'
 const app: Application = express()
 
 // cors middleware
-app.use(cors({ origin: process.env.CORS_URL, credentials: true }))
+app.use(
+  cors({
+    origin: '*', // Allow requests from any origin
+    methods: 'GET,PUT,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+  }),
+)
 
 // perse middleware
 app.use(cookieParser())

@@ -41,10 +41,8 @@ export interface Data {
 }
 
 export type CoinsData = {
-  statusCode: number;
   status: string;
-  message: string;
-  data: Coin[];
+  coins: Coin[];
 };
 
 export interface IUser {

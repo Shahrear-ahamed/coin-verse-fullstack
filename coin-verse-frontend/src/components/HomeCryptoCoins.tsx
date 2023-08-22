@@ -8,7 +8,7 @@ export default function HomeCryptoCoins({
   coinsData: CoinsData;
 }) {
   const router = useRouter();
-  const coins = coinsData.data;
+  const coins = coinsData.coins;
 
   const handleRedirect = () => {
     router.push("/dashboard/coins");

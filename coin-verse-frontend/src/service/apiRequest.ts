@@ -25,13 +25,14 @@ export const signIn = async (data: ICredentials) => {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({
         email: data.email,
         password: data.password,
       }),
     });
-    return await res.json();
+    const result = await res.json();
+
+    return result;
   } catch (err) {
     return err;
   }
@@ -39,7 +40,12 @@ export const signIn = async (data: ICredentials) => {
 
 export const homePage = async () => {
   try {
-    const res = await fetch(`${process.env.url}/crypto/home`);
+    // const res = await fetch(`${process.env.url}/crypto/home`);
+    const res = await fetch(`${process.env.CRYPTO_API}?limit=14`, {
+      headers: {
+        "x-access-token": process.env.CRYPTO_TOKEN!,
+      },
+    });
     return await res.json();
   } catch (err) {
     return err;
@@ -48,10 +54,7 @@ export const homePage = async () => {
 
 export const getProfile = async () => {
   try {
-    const response = await fetch(`${process.env.url}/auth/current-user`, {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await fetch(`${process.env.url}/auth/current-user`);
     return await response.json();
   } catch (err) {
     return err;
