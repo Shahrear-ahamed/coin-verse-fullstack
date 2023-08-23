@@ -7,6 +7,7 @@ export const signUp = async (data: ICredentials) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         email: data.email,
         password: data.password,
@@ -25,14 +26,14 @@ export const signIn = async (data: ICredentials) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         email: data.email,
         password: data.password,
       }),
     });
-    const result = await res.json();
 
-    return result;
+    return await res.json();
   } catch (err) {
     return err;
   }

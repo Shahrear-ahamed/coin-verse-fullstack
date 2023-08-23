@@ -15,16 +15,14 @@ const authSignUp = catchAsync(async (req, res) => {
     httpOnly: true,
     secure: config.env === 'production',
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    sameSite: 'none',
+    // sameSite: 'none',
   })
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: config.env === 'production',
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    sameSite: 'none',
+    // sameSite: 'none',
   })
-
-  console.log(res.cookie)
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -44,16 +42,14 @@ const authLogin = catchAsync(async (req, res) => {
     httpOnly: true,
     secure: config.env === 'production',
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    sameSite: 'none',
+    // sameSite: 'none',
   })
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: config.env === 'production',
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    sameSite: 'none',
+    // sameSite: 'none',
   })
-
-  console.log(res.cookie)
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

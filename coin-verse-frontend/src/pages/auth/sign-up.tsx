@@ -18,6 +18,7 @@ interface SignUpFormInputs {
 const SignUp = () => {
   const router = useRouter();
   const callbackUrl = router.query?.callbackUrl;
+  const redirectUser = callbackUrl || "/";
   const navigate = callbackUrl
     ? `/auth/sign-in?callbackUrl=${callbackUrl}`
     : "/auth/sign-in";
@@ -44,7 +45,7 @@ const SignUp = () => {
     if (result.statusCode === 201 && result.status) {
       context.setUser(result.data);
       toast.success(result.message);
-      router.replace("/");
+      router.push(redirectUser as string);
       return;
     }
     toast.error(result.message);

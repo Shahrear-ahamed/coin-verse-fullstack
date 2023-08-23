@@ -10,9 +10,8 @@ const app: Application = express()
 // cors middleware
 app.use(
   cors({
-    origin: '*', // Allow requests from any origin
-    methods: 'GET,PUT,POST,DELETE',
-    allowedHeaders: 'Content-Type,Authorization',
+    origin: 'https://coin-verse-frontend.vercel.app',
+    credentials: true,
   }),
 )
 
