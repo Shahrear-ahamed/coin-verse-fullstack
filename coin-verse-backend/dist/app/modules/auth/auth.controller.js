@@ -36,15 +36,15 @@ const authSignUp = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         httpOnly: true,
         secure: config_1.default.env === 'production',
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-        sameSite: 'none',
+        // sameSite: 'none',
     });
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         secure: config_1.default.env === 'production',
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-        sameSite: 'none',
+        // sameSite: 'none',
     });
-    console.log(res.cookie);
+    res.setHeader('Access-Control-Allow-Origin', 'https://coin-verse-frontend.vercel.app');
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.CREATED,
         status: true,
@@ -59,15 +59,15 @@ const authLogin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
         httpOnly: true,
         secure: config_1.default.env === 'production',
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-        sameSite: 'none',
+        // sameSite: 'none',
     });
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         secure: config_1.default.env === 'production',
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-        sameSite: 'none',
+        // sameSite: 'none',
     });
-    console.log(res.cookie);
+    res.setHeader('Access-Control-Allow-Origin', 'https://coin-verse-frontend.vercel.app');
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         status: true,

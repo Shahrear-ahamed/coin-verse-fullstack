@@ -12,9 +12,8 @@ const routes_1 = __importDefault(require("./app/routes"));
 const app = (0, express_1.default)();
 // cors middleware
 app.use((0, cors_1.default)({
-    origin: '*',
-    methods: 'GET,PUT,POST,DELETE',
-    allowedHeaders: 'Content-Type,Authorization',
+    origin: 'https://coin-verse-frontend.vercel.app',
+    credentials: true,
 }));
 // perse middleware
 app.use((0, cookie_parser_1.default)());
