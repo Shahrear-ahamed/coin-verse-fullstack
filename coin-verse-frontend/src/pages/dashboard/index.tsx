@@ -1,5 +1,6 @@
 import AddWallet from "@/components/DashboardUI/AddWallet";
 import AddWalletBtn from "@/components/DashboardUI/AddWalletBtn";
+import CryptoWallet from "@/components/DashboardUI/CryptoWallet";
 import DashboardHomeCard from "@/components/DashboardUI/DashboardHomeCard";
 import WithdrawBtn from "@/components/DashboardUI/WithdrawBtn";
 import DashboardLayout from "@/components/layout/DashboardLayout";
@@ -17,6 +18,10 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-center mt-7">
         <DashboardHomeCard balance={context?.user?.balance || 0} />
+        {context?.user?.myWallets?.length! > 0 &&
+          context?.user?.myWallets?.map((wallet: any) => (
+            <CryptoWallet key={wallet?._id} wallet={wallet} />
+          ))}
         <AddWalletBtn setShowWalletModal={setShowWalletModal} />
       </div>
 

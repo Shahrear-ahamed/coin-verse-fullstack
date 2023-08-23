@@ -12,7 +12,7 @@ const routes_1 = __importDefault(require("./app/routes"));
 const app = (0, express_1.default)();
 // cors middleware
 app.use((0, cors_1.default)({
-    origin: 'https://coin-verse-frontend.vercel.app',
+    origin: 'http://localhost:3000',
     credentials: true,
 }));
 // perse middleware

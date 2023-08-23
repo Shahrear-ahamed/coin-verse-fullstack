@@ -1,4 +1,3 @@
-import { UserContextType } from "@/context/userContext";
 import { changePassword } from "@/service/apiRequest";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,7 +10,7 @@ interface IChangePassword {
   confirmPassword: string;
 }
 
-function ChangePassword({ context }: { context: UserContextType }) {
+function ChangePassword() {
   const { register, handleSubmit, reset } = useForm<IChangePassword>();
 
   // password

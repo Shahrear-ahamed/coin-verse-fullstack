@@ -15,12 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WalletService = void 0;
 const wallet_model_1 = __importDefault(require("./wallet.model"));
 const addWallet = (userId, walletPayload) => __awaiter(void 0, void 0, void 0, function* () {
-    const wallet = yield wallet_model_1.default.findOne({ userId });
-    if ((wallet === null || wallet === void 0 ? void 0 : wallet.walletName) === walletPayload.walletName)
-        throw new Error(`You can not add same ${walletPayload.walletName}`);
-    return yield wallet_model_1.default.findOneAndUpdate({ userId }, walletPayload, {
-        new: true,
-    });
+    return yield wallet_model_1.default.findOneAndUpdate({ userId }, { $push: { myWallets: walletPayload } }, { new: true });
 });
 exports.WalletService = {
     addWallet,

@@ -21,6 +21,7 @@ export const signUp = async (data: ICredentials) => {
 
 export const signIn = async (data: ICredentials) => {
   try {
+    console.log(data);
     const res = await fetch(`${process.env.url}/auth/login`, {
       method: "POST",
       headers: {
@@ -55,7 +56,9 @@ export const homePage = async () => {
 
 export const getProfile = async () => {
   try {
-    const response = await fetch(`${process.env.url}/auth/current-user`);
+    const response = await fetch(`${process.env.url}/auth/current-user`, {
+      credentials: "include",
+    });
     return await response.json();
   } catch (err) {
     return err;

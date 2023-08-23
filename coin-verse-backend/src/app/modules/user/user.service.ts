@@ -1,3 +1,6 @@
+import httpStatus from 'http-status'
+import ApiError from '../../../errors/ApiErrors'
+import { AuthService } from '../auth/auth.service'
 import { IUser } from './user.interface'
 import User from './user.model'
 
@@ -6,9 +9,13 @@ const getMyProfile = (payload: string) => {
 }
 
 const updateMyProfile = async (userId: string, body: IUser) => {
-  return await User.findOneAndUpdate({ userId }, body, { new: true }).select({
-    _id: 0,
-  })
+  const result = await User.findOneAndUpdate({ userId }, body, { new: true })
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found', '')
+  }
+
+  return await AuthService.currentUser({ userId })
 }
 
 export const UserService = {

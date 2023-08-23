@@ -5,13 +5,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 export default function StepTwo({ stepStore, setStepStore }: IStepStoreProps) {
   const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
 
-  const handleWalletEmailCredential = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleWalletIdCredential = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setStepStore({
       ...stepStore,
-      email: newValue,
+      id: newValue,
     });
   };
 
@@ -30,13 +28,13 @@ export default function StepTwo({ stepStore, setStepStore }: IStepStoreProps) {
       <div className="mt-7 space-y-3">
         <div>
           <label className="font-medium text-gray-950">
-            email <span className="text-red-700">*</span>
+            id <span className="text-red-700">*</span>
           </label>
           <input
-            id="email"
-            type="email"
-            placeholder="your wallet email"
-            onChange={handleWalletEmailCredential}
+            id="id"
+            type="text"
+            placeholder="your wallet id"
+            onChange={handleWalletIdCredential}
             className="w-full mt-2 px-3 py-2 text-gray-950 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>

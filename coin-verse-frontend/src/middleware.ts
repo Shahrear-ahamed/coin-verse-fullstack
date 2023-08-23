@@ -5,7 +5,12 @@ export function middleware(request: NextRequest) {
   const cookie = request.cookies.get("token")?.value;
 
   const restrictedPathsForLoggedIn = ["/auth/sign-in", "/auth/sign-up"];
-  const restrictedPathsForLoggedOut = ["/dashboard"];
+  const restrictedPathsForLoggedOut = [
+    "/dashboard",
+    "/dashboard/profile",
+    "/dashboard/coins",
+    "/dashboard/users",
+  ];
 
   if (cookie && restrictedPathsForLoggedIn.includes(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));

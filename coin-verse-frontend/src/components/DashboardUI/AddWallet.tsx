@@ -1,6 +1,7 @@
+import UserContext, { UserContextType } from "@/context/userContext";
 import { IStepStore } from "@/interface/share";
-import { addWallet } from "@/service/apiRequest";
-import { useState } from "react";
+import { addWallet, getProfile } from "@/service/apiRequest";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import StepOne from "./addWalletSteps/StepOne";
 import StepThree from "./addWalletSteps/StepThree";
@@ -13,6 +14,7 @@ const AddWallet = ({
   showWalletModal: boolean;
   setShowWalletModal: (showWalletModal: boolean) => void;
 }) => {
+  const context: UserContextType = useContext(UserContext);
   const [error, setError] = useState("");
   const [steps, setStep] = useState({
     stepsItems: ["Wallet name", "Connect", "Finish"],
@@ -21,7 +23,7 @@ const AddWallet = ({
 
   const [stepStore, setStepStore] = useState<IStepStore>({
     walletName: "",
-    email: "",
+    id: "",
     password: "",
   });
 
@@ -38,16 +40,19 @@ const AddWallet = ({
   ];
 
   const handleFinish = async () => {
-    const { walletName, email, password } = stepStore;
+    const { walletName, id, password } = stepStore;
 
-    if (!walletName && !email && !password) {
+    if (!walletName && !id && !password) {
       return setError("Please fill all the fields");
     }
 
     try {
-      const result = await addWallet({ walletName, email, password });
+      const result = await addWallet({ walletName, id, password });
 
       if (result.statusCode === 200 && result.status) {
+        const currentUser = await getProfile();
+        context.setUser({ ...currentUser?.data });
+
         setError("");
         toast.success(result.message);
       }
@@ -70,7 +75,7 @@ const AddWallet = ({
     // reset values
     setStepStore({
       walletName: "",
-      email: "",
+      id: "",
       password: "",
     });
 
@@ -82,7 +87,7 @@ const AddWallet = ({
     // reset values
     setStepStore({
       walletName: "",
-      email: "",
+      id: "",
       password: "",
     });
 
@@ -91,13 +96,13 @@ const AddWallet = ({
   };
 
   const handleNext = () => {
-    const { walletName, email, password } = stepStore;
+    const { walletName, id, password } = stepStore;
 
     //check values
     if (steps.currentStep === 1 && !walletName)
       return setError("wallet name is required");
 
-    if (steps.currentStep === 2 && !email) return setError("email is required");
+    if (steps.currentStep === 2 && !id) return setError("id is required");
 
     if (steps.currentStep === 2 && !password)
       return setError("password is required");

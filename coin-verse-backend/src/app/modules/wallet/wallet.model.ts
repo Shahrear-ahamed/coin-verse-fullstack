@@ -12,15 +12,19 @@ const userSchema = new Schema<IWallet>(
       type: Number,
       default: 20,
     },
-    walletName: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-    password: {
-      type: String,
-    },
+    myWallets: [
+      {
+        walletName: {
+          type: String,
+        },
+        id: {
+          type: String,
+        },
+        password: {
+          type: String,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

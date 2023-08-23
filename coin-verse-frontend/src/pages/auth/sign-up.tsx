@@ -45,7 +45,7 @@ const SignUp = () => {
     if (result.statusCode === 201 && result.status) {
       context.setUser(result.data);
       toast.success(result.message);
-      router.push(redirectUser as string);
+      window.location.href = redirectUser as string;
       return;
     }
     toast.error(result.message);

@@ -10,7 +10,7 @@ const app: Application = express()
 // cors middleware
 app.use(
   cors({
-    origin: 'https://coin-verse-frontend.vercel.app',
+    origin: 'http://localhost:3000',
     credentials: true,
   }),
 )

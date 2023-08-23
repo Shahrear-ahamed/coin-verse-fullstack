@@ -24,11 +24,6 @@ const authSignUp = catchAsync(async (req, res) => {
     // sameSite: 'none',
   })
 
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://coin-verse-frontend.vercel.app',
-  )
-
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     status: true,
@@ -55,11 +50,6 @@ const authLogin = catchAsync(async (req, res) => {
     expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
     // sameSite: 'none',
   })
-
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://coin-verse-frontend.vercel.app',
-  )
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

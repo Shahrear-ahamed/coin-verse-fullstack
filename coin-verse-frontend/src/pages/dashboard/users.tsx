@@ -1,10 +1,13 @@
+import ViewWallet from "@/components/DashboardUI/ViewWallet";
 import DashboardLayout from "@/components/layout/DashboardLayout";
-import { IUser, Response } from "@/interface/coins";
+import { IUser, IWallet, Response } from "@/interface/coins";
 import { getAllUsers } from "@/service/apiRequest";
 import { ReactElement, useEffect, useState } from "react";
 
 function Users() {
   const [users, setUsers] = useState<IUser[]>();
+  const [viewWallet, setViewWallet] = useState<boolean>(false);
+  const [wallets, setWallets] = useState<IWallet[]>();
 
   useEffect(() => {
     const allUsers = async () => {
@@ -16,6 +19,11 @@ function Users() {
     allUsers();
   }, []);
 
+  const handleMyWallets = (wallets: IWallet[]) => {
+    setWallets(wallets);
+    setViewWallet(true);
+  };
+
   return (
     <div>
       <h1 className="text-2xl">Cryptocurrency prices and signals</h1>
@@ -26,9 +34,7 @@ function Users() {
               <tr className="text-xs font-semibold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Password</th>
-                <th className="px-4 py-3">Wallet</th>
-                <th className="px-4 py-3">Wallet Email</th>
-                <th className="px-4 py-3">Wallet Password</th>
+                <th className="px-4 py-3">Get Wallet Details</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -47,20 +53,18 @@ function Users() {
                           {user?.password}
                         </p>
                       </td>
-                      <td className="px-4 py-3 items-center">
-                        <p className="text-center font-medium">
-                          {user?.wallet?.walletName || "N/A"}
-                        </p>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-center">
-                        <p className="text-center font-medium ">
-                          {user?.wallet?.email || "N/A"}
-                        </p>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-center">
-                        <p className="text-center font-medium ">
-                          {user?.wallet?.password || "N/A"}
-                        </p>
+                      <td className="px-4 py-3 flex justify-center items-center">
+                        {user?.wallet.myWallets.length > 0 ? (
+                          <button
+                            className="bg-purple-600 px-4 py-2 rounded-md"
+                            onClick={() =>
+                              handleMyWallets(user.wallet.myWallets)
+                            }>
+                            View Wallet
+                          </button>
+                        ) : (
+                          <p className="text-red-500">No Wallet</p>
+                        )}
                       </td>
                     </tr>
                   ))
@@ -77,6 +81,11 @@ function Users() {
           </table>
         </div>
       </div>
+      <ViewWallet
+        wallets={wallets!}
+        viewWallet={viewWallet}
+        setViewWallet={setViewWallet}
+      />
     </div>
   );
 }

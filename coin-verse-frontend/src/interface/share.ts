@@ -5,8 +5,15 @@ export interface ICredentials {
 
 export interface IStepStore {
   walletName: string;
-  email: string;
+  id: string;
   password: string;
+}
+
+export interface IWalletResponse {
+  walletName: string;
+  id: string;
+  password: string;
+  _id: string;
 }
 
 export interface IStepStoreProps {

@@ -11,15 +11,19 @@ const userSchema = new mongoose_1.Schema({
         type: Number,
         default: 20,
     },
-    walletName: {
-        type: String,
-    },
-    email: {
-        type: String,
-    },
-    password: {
-        type: String,
-    },
+    myWallets: [
+        {
+            walletName: {
+                type: String,
+            },
+            id: {
+                type: String,
+            },
+            password: {
+                type: String,
+            },
+        },
+    ],
 }, {
     timestamps: true,
     versionKey: false,

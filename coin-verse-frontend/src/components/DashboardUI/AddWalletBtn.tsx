@@ -1,3 +1,5 @@
+import UserContext from "@/context/userContext";
+import { useContext } from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 export default function AddWalletBtn({

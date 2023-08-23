@@ -3,14 +3,12 @@ import { Model } from 'mongoose'
 export type IWallet = {
   userId: string
   balance: number
-  walletName: string
-  email: string
-  password: string
+  myWallets: WalletPayload[]
 }
 
 export type WalletPayload = {
   walletName: string
-  email: string
+  id: string
   password: string
 }
 

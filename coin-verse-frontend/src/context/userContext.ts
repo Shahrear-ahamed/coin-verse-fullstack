@@ -1,14 +1,16 @@
+import { IStepStore } from "@/interface/share";
 import { createContext, Dispatch, SetStateAction } from "react";
 
-type IUser = {
-  role: string;
-  name: string;
-  email: string;
-  userId: string;
-  contactNo: string;
-  dateOfBirth: Date;
-  balance: number;
-  showSignUpBonus: boolean;
+export type IUser = {
+  role?: string;
+  name?: string;
+  email?: string;
+  userId?: string;
+  contactNo?: string;
+  dateOfBirth?: Date;
+  balance?: number;
+  myWallets?: IStepStore[];
+  showSignUpBonus?: boolean;
 };
 
 export interface UserContextType {

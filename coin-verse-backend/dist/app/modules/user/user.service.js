@@ -13,14 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const ApiErrors_1 = __importDefault(require("../../../errors/ApiErrors"));
+const auth_service_1 = require("../auth/auth.service");
 const user_model_1 = __importDefault(require("./user.model"));
 const getMyProfile = (payload) => {
     return user_model_1.default.findOne({ userId: payload }, { _id: 0, balance: 0 });
 };
 const updateMyProfile = (userId, body) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield user_model_1.default.findOneAndUpdate({ userId }, body, { new: true }).select({
-        _id: 0,
-    });
+    const result = yield user_model_1.default.findOneAndUpdate({ userId }, body, { new: true });
+    if (!result) {
+        throw new ApiErrors_1.default(http_status_1.default.NOT_FOUND, 'User not found', '');
+    }
+    return yield auth_service_1.AuthService.currentUser({ userId });
 });
 exports.UserService = {
     getMyProfile,

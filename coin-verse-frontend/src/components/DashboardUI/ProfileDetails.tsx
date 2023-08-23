@@ -19,6 +19,7 @@ function ProfileDetails({ context }: { context: UserContextType }) {
 
   // user data
   const user = context?.user;
+  const setUser = context?.setUser;
   const dateOfBirth = moment(user?.dateOfBirth).format("YYYY-MM-DD");
 
   // details
@@ -35,6 +36,7 @@ function ProfileDetails({ context }: { context: UserContextType }) {
 
     if (result.statusCode === 200 && result.status) {
       context.setUser(result.data);
+
       toast.success(result.message);
       reset();
       setIsEditingPDetails(false);

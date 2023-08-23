@@ -1,4 +1,5 @@
 import UserContext, { UserContextType } from "@/context/userContext";
+import { logOut } from "@/service/apiRequest";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
@@ -51,6 +52,18 @@ const Aside: React.FC<AsideProps> = ({ isSideMenuOpen, toggleSideMenu }) => {
     routesToRender = [...routesToRender, ...adminRoute];
   }
 
+  const handleLogout = async () => {
+    try {
+      const data = await logOut();
+
+      context?.setUser(null);
+
+      if (data.status) {
+        window.location.href = "/";
+      }
+    } catch (err) {}
+  };
+
   return (
     <>
       <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block max-h-full">
@@ -71,6 +84,11 @@ const Aside: React.FC<AsideProps> = ({ isSideMenuOpen, toggleSideMenu }) => {
                 </Link>
               </li>
             ))}
+            <li
+              className="w-32 mx-auto mt-10 cursor-pointer py-3 text-lg text-center rounded-xl font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 bg-[#a4f08f]"
+              onClick={handleLogout}>
+              Logout
+            </li>
           </ul>
         </div>
       </aside>
@@ -106,6 +124,11 @@ const Aside: React.FC<AsideProps> = ({ isSideMenuOpen, toggleSideMenu }) => {
                 </Link>
               </li>
             ))}
+            <li
+              className="w-32 mx-auto mt-10 cursor-pointer py-3 text-lg text-center rounded-xl font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 bg-[#a4f08f]"
+              onClick={handleLogout}>
+              Logout
+            </li>
           </ul>
         </div>
       </aside>

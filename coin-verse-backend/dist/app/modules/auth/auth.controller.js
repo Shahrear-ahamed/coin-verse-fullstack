@@ -44,7 +44,6 @@ const authSignUp = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
         // sameSite: 'none',
     });
-    res.setHeader('Access-Control-Allow-Origin', 'https://coin-verse-frontend.vercel.app');
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.CREATED,
         status: true,
@@ -67,7 +66,6 @@ const authLogin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
         // sameSite: 'none',
     });
-    res.setHeader('Access-Control-Allow-Origin', 'https://coin-verse-frontend.vercel.app');
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         status: true,

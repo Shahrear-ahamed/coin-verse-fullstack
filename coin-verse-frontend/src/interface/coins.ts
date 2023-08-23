@@ -52,10 +52,14 @@ export interface IUser {
   password: string;
   wallet: {
     balance: number;
-    walletName: string;
-    email: string;
-    password: string;
+    myWallets: IWallet[];
   };
+}
+
+export interface IWallet {
+  walletName: string;
+  id: string;
+  password: string;
 }
 
 export interface Response<T> {

@@ -12,9 +12,9 @@ export default function StepThree({ stepStore }: { stepStore: IStepStore }) {
         />
       </div>
       <div>
-        <label className="font-medium text-gray-950">email</label>
+        <label className="font-medium text-gray-950">id</label>
         <input
-          value={stepStore.email}
+          value={stepStore.id}
           disabled
           className="w-full mt-2 px-3 py-2 text-gray-950 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
         />

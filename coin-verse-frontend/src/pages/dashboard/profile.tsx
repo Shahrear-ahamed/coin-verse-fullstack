@@ -13,7 +13,7 @@ function Profile() {
       </h1>
       <div className="flex flex-col lg:flex-row justify-around items-center lg:items-start gap-5 mt-10 md:mt-20">
         <ProfileDetails context={context} />
-        <ChangePassword context={context} />
+        <ChangePassword />
       </div>
     </>
   );
