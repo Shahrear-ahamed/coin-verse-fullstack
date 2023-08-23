@@ -1,6 +1,5 @@
 import UserContext, { UserContextType } from "@/context/userContext";
 import HeadContent from "@/libs/head";
-import { signIn } from "@/service/apiRequest";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -34,7 +33,21 @@ const Login = () => {
   const onSubmit = async (userData: LoginFormInputs) => {
     const { email, password } = userData;
 
-    const result = await signIn({ email, password });
+    // const result = await signIn({ email, password });
+
+    const res = await fetch(`${process.env.url}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const result = await res.json();
 
     if (result.statusCode === 200 && result.status) {
       context.setUser(result.data);
